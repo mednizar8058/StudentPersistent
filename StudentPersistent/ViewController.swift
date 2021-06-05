@@ -9,6 +9,7 @@
 import UIKit
 
 struct Student:Codable{
+    // now Student supports encoding and decoding
     var fname:String
     var lname:String
 }
@@ -34,15 +35,24 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         studentTable.reloadData()
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete{
+            students.remove(at: indexPath.row)
+            UserDefaults.standard.set(try? PropertyListEncoder().encode(students), forKey: "students")
+            studentTable.reloadData()
+        }
+    }
+    
     
     
 
     @IBOutlet weak var studentTable: UITableView!
     override func viewDidLoad(){
+        UserDefaults.standard.removeObject(forKey: "students")
         super.viewDidLoad()
         if UserDefaults.standard.object(forKey: "students") != nil{
         let loadedData = UserDefaults.standard.object(forKey: "students")
-            students = [try! PropertyListDecoder().decode(Student.self, from: loadedData as! Data)]
+            students = try! PropertyListDecoder().decode([Student].self, from: loadedData as! Data)
         
             studentTable.reloadData()
     }

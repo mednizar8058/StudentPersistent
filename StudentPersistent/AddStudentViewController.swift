@@ -19,12 +19,14 @@ class AddStudentViewController: UIViewController {
     @IBAction func addStudent(_ sender: UIButton) {
         students.append(Student(fname: fname.text!,lname: lname.text!))
         
+        
+        
         fname.text = ""
         lname.text = ""
         print(students)
         
-        let encodedList = try? PropertyListEncoder().encode(students)
-        UserDefaults.standard.set(encodedList, forKey: "students")
+       
+        UserDefaults.standard.set(try? PropertyListEncoder().encode(students), forKey: "students")
     }
     override func viewDidLoad() {
         super.viewDidLoad()
