@@ -28,21 +28,17 @@ class AddStudentViewController: UIViewController {
        
         UserDefaults.standard.set(try? PropertyListEncoder().encode(students), forKey: "students")
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
             
         }
 
-        // Do any additional setup after loading the view.
     
     
-    /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destination = segue.destination as! ViewController
-        
-        destination.students.append((fname.text!,lname.text!))
-    }
- */
+    
+    
     
     
 

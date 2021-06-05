@@ -36,6 +36,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
         if editingStyle == .delete{
             students.remove(at: indexPath.row)
             UserDefaults.standard.set(try? PropertyListEncoder().encode(students), forKey: "students")
