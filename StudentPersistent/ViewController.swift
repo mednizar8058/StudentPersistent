@@ -40,6 +40,7 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
         if editingStyle == .delete{
             students.remove(at: indexPath.row)
             UserDefaults.standard.set(try? PropertyListEncoder().encode(students), forKey: "students")
+            print("deleting")
             studentTable.reloadData()
         }
     }
@@ -49,10 +50,10 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
 
     @IBOutlet weak var studentTable: UITableView!
     override func viewDidLoad(){
-        UserDefaults.standard.removeObject(forKey: "students")
+        
         super.viewDidLoad()
-        if UserDefaults.standard.object(forKey: "students") != nil{
-        let loadedData = UserDefaults.standard.object(forKey: "students")
+        if let loadedData = UserDefaults.standard.object(forKey: "students"){
+        
             students = try! PropertyListDecoder().decode([Student].self, from: loadedData as! Data)
         
             studentTable.reloadData()

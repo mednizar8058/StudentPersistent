@@ -25,7 +25,7 @@ class AddStudentViewController: UIViewController {
         lname.text = ""
         print(students)
         
-       
+      
         UserDefaults.standard.set(try? PropertyListEncoder().encode(students), forKey: "students")
     }
     
